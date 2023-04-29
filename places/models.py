@@ -23,7 +23,7 @@ class Image(models.Model):
         related_name='images',
         on_delete=models.SET_NULL,
         null=True)
-    img = models.ImageField('Картинка', upload_to='images', null=True, blank=True)
+    img = models.ImageField('Картинка', upload_to='', null=True, blank=True)
 
     def __str__(self):
         return f'{self.pk} {self.place}'
