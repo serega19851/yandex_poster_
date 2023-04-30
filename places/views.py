@@ -2,6 +2,7 @@ import json
 import os
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from .models import Place
 
 
@@ -15,8 +16,7 @@ def index(request):
             ]
         }
     }
-    for num, place in enumerate(places):
-        detailsurl = ['../static/roofs24.json', '../static/moscow_legends.json']
+    for place in places:
         context['saved_places']['features'].append(
             {
                 "type": "Feature",
@@ -27,14 +27,14 @@ def index(request):
                 "properties": {
                       "title": place.title,
                       "placeId": place.id,
-                      "detailsUrl": f"{detailsurl[num]}"
+                      "detailsUrl": reverse('info_location', args=[place.id])
                 }
             }
         )
     return render(request, "index.html", context=context)
 
 
-def gets_object_id(request, place_id):
+def get_infо_location(request, place_id):
     place = get_object_or_404(Place, id=place_id)
     place_imgs = place.images.all()
     img_paths = [os.path.join('media', f'{image.img}') for image in place_imgs]
