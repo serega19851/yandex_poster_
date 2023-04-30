@@ -1,36 +1,31 @@
 from django.shortcuts import render
+from .models import Place
 
 
 def index(request):
+    places = Place.objects.all()
     context = {
         'saved_places': {
             "type": "FeatureCollection",
             "features": [
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [37.62, 55.793676]
-                    },
-                    "properties": {
-                        "title": "Легенды Москвы",
-                        "placeId": "moscow_legends",
-                        "detailsUrl": "../static/moscow_legends.json"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [37.64, 55.753676]
-                    },
-                    "properties": {
-                        "title": "Крыши24.рф",
-                        "placeId": "roofs24",
-                        "detailsUrl": "../static/roofs24.json"
-                    }
-                }
+
             ]
         }
     }
+    for num, place in enumerate(places):
+        detailsurl = ['../static/roofs24.json', '../static/moscow_legends.json']
+        context['saved_places']['features'].append(
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [place.lng, place.lat]
+                },
+                "properties": {
+                      "title": place.title,
+                      "placeId": place.id,
+                      "detailsUrl": f"{detailsurl[num]}"
+                }
+            }
+        )
     return render(request, "index.html", context=context)

@@ -5,8 +5,8 @@ class Place(models.Model):
     title = models.CharField('Название места', max_length=200)
     description_short = models.TextField('Короткое описание')
     description_long = models.TextField('Длинное описание')
-    lng = models.DecimalField('Долгота', max_digits=16, decimal_places=14, null=True)
-    lat = models.DecimalField('Широта', max_digits=16, decimal_places=14, null=True)
+    lng = models.FloatField('Долгота', null=True)
+    lat = models.FloatField('Широта', null=True)
 
     def __str__(self):
         return self.title
