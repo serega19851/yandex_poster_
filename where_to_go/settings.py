@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+from environs import Env
+
+env = Env()
+env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=4dyh6r!2ry#9ziv4xdlfow(*1v^b64c$d4zd3+vn#d&pg4e=b'
+SECRET_KEY = env.str('SECRET_KEY', 'REPLACE_ME')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', True)
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', ['127.0.0.1'])
 
 
 # Application definition
@@ -78,8 +84,8 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': env.str('DATABASE_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': BASE_DIR / env.str('DATABASE_NAME', 'db.sqlite3'),
     }
 }
 
@@ -120,19 +126,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = env.str('STATIC_URL', '/static/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-STATIC_ROOT = '/static/'
+#STATIC_ROOT = env.str('STATIC_ROOT', '/static/')
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, env.str('STATIC_ROOT', 'static'))
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = env.str('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
 
-MEDIA_URL = '/media/'
+MEDIA_URL = env.str('MEDIA_URL', '/media/')
