@@ -4,6 +4,12 @@ from tinymce.models import HTMLField
 
 class Place(models.Model):
     title = models.CharField('Название места', max_length=200)
+    place_id = models.CharField(
+        'Уникальный идентификатор',
+        max_length=50,
+        null=True,
+        unique=True
+    )
     description_short = models.TextField('Короткое описание')
     description_long = HTMLField('Длинное описание')
     lng = models.FloatField('Долгота', null=True)
@@ -26,6 +32,12 @@ class Image(models.Model):
         null=True
     )
     img = models.ImageField('Картинка', upload_to='', null=True, blank=True)
+    imagetitle = models.CharField(
+        'Название изображения',
+        max_length=70,
+        null=True,
+        unique=True,
+    )
     my_order = models.PositiveIntegerField('Порядок', default=1)
 
     def __str__(self):
