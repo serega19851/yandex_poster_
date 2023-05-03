@@ -14,8 +14,10 @@ def get_imagetitle(link):
 
 
 class Command(BaseCommand):
-    help = '''Загружает данные в БД по переданной ссылке, \
-              ссылка должна содержать json-файл.'''
+    help = ''' 
+    Загружает данные в БД по переданной ссылке,
+    ссылка должна содержать json-файл.
+    '''
 
     def add_arguments(self, parser):
         parser.add_argument('link', type=str, help='Ссылка на json-файл.')

@@ -31,7 +31,12 @@ class Image(models.Model):
         on_delete=models.SET_NULL,
         null=True
     )
-    img = models.ImageField('Картинка', upload_to='', null=True, blank=True)
+    img = models.ImageField(
+        'Картинка',
+        upload_to='',
+        null=True,
+        blank=True
+    )
     imagetitle = models.CharField(
         'Название изображения',
         max_length=70,

@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ru">
-<head>
+  <head>
   <meta charset="utf-8">
   <title>Куда пойти — Москва глазами Артёма</title>
 
@@ -39,8 +39,7 @@
     }
   </style>
 
-   {{ saved_places|json_script:"places-geojson" }}
-
+  {{ saved_places|json_script:"places-geojson" }}
 
   <script id="app-template" type="text/template">
     <div v-bind:class="{'sidebar-content': 1, 'bg-white': selectedPlace, 'bg-secondary': !selectedPlace}">
@@ -94,7 +93,7 @@
   </script>
 
 </head>
-<body>
+  <body>
   <div id="sidebar">
     <div id="sidebar-app"></div>
   </div>
@@ -282,5 +281,6 @@
       }
     }
   </script>
+
 </body>
 </html>

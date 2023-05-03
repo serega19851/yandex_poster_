@@ -31,8 +31,9 @@ class ImageAdmin(admin.ModelAdmin):
     readonly_fields = ['place_img', ]
 
     def place_img(self, obj):
-        return format_html('<img src="{url}" height="{height}" />'.format(
-            url=obj.img.url,
-            height='200px',
+        return format_html(
+            '<img src="{url}" height="{height}" />'.format(
+                url=obj.img.url,
+                height='200px',
             )
         )
