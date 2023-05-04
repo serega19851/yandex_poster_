@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
@@ -34,8 +35,8 @@ def index(request):
     return render(request, "index.html", context=context)
 
 
-def get_infо_location(request, place_id):
-    place = get_object_or_404(Place, id=place_id)
+def get_infо_location(request, pk):
+    place = get_object_or_404(Place, id=pk)
     place_imgs = place.images.all()
     img_paths = [os.path.join('media', f'{image.img}') for image in place_imgs]
     context = {

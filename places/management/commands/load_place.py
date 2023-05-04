@@ -36,9 +36,6 @@ class Command(BaseCommand):
                     'description_long': data_json.get('description_long'),
                     'lng': data_json.get('coordinates').get('lng'),
                     'lat': data_json.get('coordinates').get('lat'),
-                    'place_id': hashlib.md5(
-                        data_json.get('title').encode()
-                        ).hexdigest()
                 }
             )
             place = place if place else new_place

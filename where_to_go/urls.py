@@ -20,7 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path(
-        'places/<int:place_id>/',
+        'places/<int:pk>/',
         views.get_infо_location,
         name='info_location'
     ),
