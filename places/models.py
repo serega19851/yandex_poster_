@@ -9,12 +9,12 @@ class Place(models.Model):
     lng = models.FloatField('Долгота')
     lat = models.FloatField('Широта')
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name_plural = 'Места'
         verbose_name = 'Место'
+
+    def __str__(self):
+        return self.title
 
 
 class Image(models.Model):
@@ -39,10 +39,10 @@ class Image(models.Model):
     )
     my_order = models.PositiveIntegerField('Порядок', default=1)
 
-    def __str__(self):
-        return f'{self.pk} {self.place}'
-
     class Meta:
         verbose_name_plural = 'Картинки'
         verbose_name = 'Картинка'
         ordering = ['my_order']
+
+    def __str__(self):
+        return f'{self.pk} {self.place}'
