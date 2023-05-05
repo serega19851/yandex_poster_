@@ -1,6 +1,5 @@
 import os
 import sys
-import hashlib
 from io import BytesIO
 from urllib.parse import urlsplit
 from django.core.management.base import BaseCommand
