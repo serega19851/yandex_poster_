@@ -25,24 +25,13 @@ class Image(models.Model):
         on_delete=models.SET_NULL,
         null=True
     )
-    img = models.ImageField(
-        'Картинка',
-        upload_to='',
-        null=True,
-        blank=True
-    )
-    imagetitle = models.CharField(
-        'Название изображения',
-        max_length=70,
-        null=True,
-        unique=True,
-    )
-    my_order = models.PositiveIntegerField('Порядок', default=1)
+    img = models.ImageField('Картинка')
+    order = models.PositiveIntegerField('Порядок', default=1)
 
     class Meta:
         verbose_name_plural = 'Картинки'
         verbose_name = 'Картинка'
-        ordering = ['my_order']
+        ordering = ['order']
 
     def __str__(self):
         return f'{self.pk} {self.place}'
