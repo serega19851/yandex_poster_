@@ -9,7 +9,7 @@ from .models import Place
 def index(request):
     places = Place.objects.all()
     context = {
-        'saved_places': {
+        "saved_places": {
             "type": "FeatureCollection",
             "features": [
 
@@ -17,7 +17,7 @@ def index(request):
         }
     }
     for place in places:
-        context['saved_places']['features'].append(
+        context["saved_places"]["features"].append(
             {
                 "type": "Feature",
                 "geometry": {
@@ -27,7 +27,7 @@ def index(request):
                 "properties": {
                       "title": place.title,
                       "placeId": place.id,
-                      "detailsUrl": reverse('info_location', args=[place.id])
+                      "detailsUrl": reverse("info_location", args=[place.id])
                 }
             }
         )
@@ -37,7 +37,7 @@ def index(request):
 def get_infо_location(request, pk):
     place = get_object_or_404(Place, id=pk)
     place_imgs = place.images.all()
-    img_paths = [os.path.join('media', f'{image.img}') for image in place_imgs]
+    img_paths = [os.path.join("media", f"{image.img}") for image in place_imgs]
     context = {
         "title": place.title,
         "imgs": img_paths,
