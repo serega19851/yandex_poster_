@@ -38,7 +38,7 @@ def index(request):
 def get_infо_location(request, pk):
     place = get_object_or_404(Place, id=pk)
     place_imgs = place.images.all()
-    img_paths = [os.path.join("media", f"{image.img}") for image in place_imgs]
+    img_paths = [image.img.url for image in place_imgs]
     context = {
         "title": place.title,
         "imgs": img_paths,
