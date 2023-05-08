@@ -8,16 +8,10 @@ from .models import Place
 
 def index(request):
     places = Place.objects.all()
-    context = {
-        "saved_places": {
-            "type": "FeatureCollection",
-            "features": [
+    features = []
 
-            ]
-        }
-    }
     for place in places:
-        context["saved_places"]["features"].append(
+        features.append(
             {
                 "type": "Feature",
                 "geometry": {
@@ -31,6 +25,13 @@ def index(request):
                 }
             }
         )
+
+    context = {
+        "saved_places": {
+            "type": "FeatureCollection",
+            "features": features
+        }
+    }
     return render(request, "index.html", context=context)
 
 
