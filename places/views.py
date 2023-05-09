@@ -49,5 +49,5 @@ def get_infо_location(request, pk):
     }
     return JsonResponse(
         context,
-        json_dumps_params={'ensure_ascii': False, 'indent': 4}
+        json_dumps_params={"ensure_ascii": False, "indent": 4}
     )
