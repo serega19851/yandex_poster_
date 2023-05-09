@@ -8,20 +8,20 @@ from places import views
 
 urlpatterns = [
     url(
-        r"^media/(?P<path>.*)$",
+        r'^media/(?P<path>.*)$',
         serve,
-        {"document_root": settings.MEDIA_ROOT},
+        {'document_root': settings.MEDIA_ROOT},
     ),
     url(
-        r"^static/(?P<path>.*)$",
+        r'^static/(?P<path>.*)$',
         serve,
-        {"document_root": settings.STATIC_ROOT},
+        {'document_root': settings.STATIC_ROOT},
     ),
-    path("admin/", admin.site.urls),
-    path("", views.index),
+    path('admin/', admin.site.urls),
+    path('', views.index),
     path(
-        "places/<int:pk>/",
+        'places/<int:pk>/',
         views.get_infо_location,
-        name="info_location"
+        name='info_location'
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -11,26 +11,26 @@ def index(request):
     for place in places:
         features.append(
             {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [place.lng, place.lat]
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [place.lng, place.lat]
                 },
-                "properties": {
-                      "title": place.title,
-                      "placeId": place.id,
-                      "detailsUrl": reverse("info_location", args=[place.id])
+                'properties': {
+                      'title': place.title,
+                      'placeId': place.id,
+                      'detailsUrl': reverse('info_location', args=[place.id])
                 }
             }
         )
 
     context = {
-        "saved_places": {
-            "type": "FeatureCollection",
-            "features": features
+        'saved_places': {
+            'type': 'FeatureCollection',
+            'features': features
         }
     }
-    return render(request, "index.html", context=context)
+    return render(request, 'index.html', context=context)
 
 
 def get_infо_location(request, pk):
@@ -38,16 +38,16 @@ def get_infо_location(request, pk):
     place_imgs = place.images.all()
     img_paths = [image.img.url for image in place_imgs]
     context = {
-        "title": place.title,
-        "imgs": img_paths,
-        "description_short": place.description_short,
-        "description_long": place.description_long,
-        "coordinates": {
-            "lng": place.lng,
-            "lat": place.lat
+        'title': place.title,
+        'imgs': img_paths,
+        'description_short': place.description_short,
+        'description_long': place.description_long,
+        'coordinates': {
+            'lng': place.lng,
+            'lat': place.lat
         }
     }
     return JsonResponse(
         context,
-        json_dumps_params={"ensure_ascii": False, "indent": 4}
+        json_dumps_params={'ensure_ascii': False, 'indent': 4}
     )
