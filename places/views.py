@@ -33,7 +33,7 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 
-def get_infо_location(request, pk):
+def get_info_location(request, pk):
     place = get_object_or_404(Place, id=pk)
     place_imgs = place.images.all()
     img_paths = [image.img.url for image in place_imgs]
